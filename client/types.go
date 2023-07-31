@@ -109,7 +109,7 @@ type TransactionPayload struct {
 	BlockNumber          int       `json:"blockNumber"`
 	TransactionIndex     int       `json:"transactionIndex"`
 	Input                string    `json:"input"`
-	GasUsed              string    `json:"gasUsed"`
+	GasUsed              int       `json:"gasUsed"`
 	Asset                string    `json:"asset"`
 	WatchedAddress       string    `json:"watchedAddress"`
 	Direction            string    `json:"direction"`
