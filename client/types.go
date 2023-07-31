@@ -43,6 +43,82 @@ type Account struct {
 	Address string `json:"address"`
 }
 
+type ContractCall struct {
+	ContractType    string `json:"contractType"`
+	ContractAddress string `json:"contractAddress"`
+	MethodName      string `json:"methodName"`
+	Params          struct {
+		From  string `json:"_from"`
+		To    string `json:"_to"`
+		Value string `json:"_value"`
+	} `json:"params"`
+	ContractAlias    string `json:"contractAlias"`
+	ContractDecimals int    `json:"contractDecimals"`
+	ContractName     string `json:"contractName"`
+	DecimalValue     string `json:"decimalValue"`
+}
+
+type InternalTransaction struct {
+	Type         string       `json:"type"`
+	From         string       `json:"from"`
+	To           string       `json:"to"`
+	Input        string       `json:"input"`
+	Gas          int          `json:"gas"`
+	GasUsed      int          `json:"gasUsed"`
+	Value        string       `json:"value"`
+	ContractCall ContractCall `json:"contractCall"`
+}
+
+type NetBalanceChange struct {
+	Address        string `json:"address"`
+	BalanceChanges []struct {
+		Delta string `json:"delta"`
+		Asset struct {
+			Type            string `json:"type"`
+			Symbol          string `json:"symbol"`
+			ContractAddress string `json:"contractAddress"`
+		} `json:"asset"`
+		Breakdown []struct {
+			Counterparty string `json:"counterparty"`
+			Amount       string `json:"amount"`
+		} `json:"breakdown"`
+	} `json:"balanceChanges"`
+}
+
+type TransactionPayload struct {
+	Type                 int       `json:"type"`
+	MaxFeePerGas         string    `json:"maxFeePerGas"`
+	MaxPriorityFeePerGas string    `json:"maxPriorityFeePerGas"`
+	BaseFeePerGas        string    `json:"baseFeePerGas"`
+	TimeStamp            time.Time `json:"timeStamp"`
+	Status               string    `json:"status"`
+	MonitorID            string    `json:"monitorId"`
+	MonitorVersion       string    `json:"monitorVersion"`
+	TimePending          string    `json:"timePending"`
+	PendingTimeStamp     time.Time `json:"pendingTimeStamp"`
+	BlocksPending        int       `json:"blocksPending"`
+	Hash                 string    `json:"hash"`
+	From                 string    `json:"from"`
+	To                   string    `json:"to"`
+	Value                string    `json:"value"`
+	Gas                  int       `json:"gas"`
+	GasPrice             string    `json:"gasPrice"`
+	GasPriceGwei         int       `json:"gasPriceGwei"`
+	Nonce                int       `json:"nonce"`
+	BlockHash            string    `json:"blockHash"`
+	BlockNumber          int       `json:"blockNumber"`
+	TransactionIndex     int       `json:"transactionIndex"`
+	Input                string    `json:"input"`
+	GasUsed              string    `json:"gasUsed"`
+	Asset                string    `json:"asset"`
+	WatchedAddress       string    `json:"watchedAddress"`
+	Direction            string    `json:"direction"`
+	Counterparty         string    `json:"counterparty"`
+	// Internal Transactions Payload
+	InternalTransactions []InternalTransaction `json:"internalTransactions"`
+	NetBalanceChanges    []NetBalanceChange    `json:"netBalanceChanges"`
+}
+
 // EthTxPayload is payload returned from a subscription to blocknative api
 type EthTxPayload struct {
 	Version       int       `json:"version"`
@@ -52,36 +128,7 @@ type EthTxPayload struct {
 	Status        string    `json:"status"`
 	Event         struct {
 		BaseMessage
-		Transaction struct {
-			Type                 int       `json:"type"`
-			MaxFeePerGas         string    `json:"maxFeePerGas"`
-			MaxPriorityFeePerGas string    `json:"maxPriorityFeePerGas"`
-			BaseFeePerGas        string    `json:"baseFeePerGas"`
-			TimeStamp            time.Time `json:"timeStamp"`
-			Status               string    `json:"status"`
-			MonitorID            string    `json:"monitorId"`
-			MonitorVersion       string    `json:"monitorVersion"`
-			TimePending          string    `json:"timePending"`
-			PendingTimeStamp     time.Time `json:"pendingTimeStamp"`
-			BlocksPending        int       `json:"blocksPending"`
-			Hash                 string    `json:"hash"`
-			From                 string    `json:"from"`
-			To                   string    `json:"to"`
-			Value                string    `json:"value"`
-			Gas                  int       `json:"gas"`
-			GasPrice             string    `json:"gasPrice"`
-			GasPriceGwei         int       `json:"gasPriceGwei"`
-			Nonce                int       `json:"nonce"`
-			BlockHash            string    `json:"blockHash"`
-			BlockNumber          int       `json:"blockNumber"`
-			TransactionIndex     int       `json:"transactionIndex"`
-			Input                string    `json:"input"`
-			GasUsed              string    `json:"gasUsed"`
-			Asset                string    `json:"asset"`
-			WatchedAddress       string    `json:"watchedAddress"`
-			Direction            string    `json:"direction"`
-			Counterparty         string    `json:"counterparty"`
-		} `json:"transaction"`
+		Transaction TransactionPayload `json:"transaction"`
 	} `json:"event"`
 }
 

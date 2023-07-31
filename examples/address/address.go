@@ -5,9 +5,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/bonedaddy/go-blocknative/client"
 	"github.com/gorilla/websocket"
 	"github.com/joho/godotenv"
+	"github.com/tiennampham23/go-blocknative/client"
 )
 
 func main() {
