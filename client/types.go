@@ -86,7 +86,7 @@ type NetBalanceChange struct {
 }
 
 type TransactionPayload struct {
-	Type                 int       `json:"type"`
+	Type                 uint64    `json:"type"`
 	MaxFeePerGas         string    `json:"maxFeePerGas"`
 	MaxPriorityFeePerGas string    `json:"maxPriorityFeePerGas"`
 	BaseFeePerGas        string    `json:"baseFeePerGas"`
@@ -96,20 +96,20 @@ type TransactionPayload struct {
 	MonitorVersion       string    `json:"monitorVersion"`
 	TimePending          string    `json:"timePending"`
 	PendingTimeStamp     time.Time `json:"pendingTimeStamp"`
-	BlocksPending        int       `json:"blocksPending"`
+	BlocksPending        uint64    `json:"blocksPending"`
 	Hash                 string    `json:"hash"`
 	From                 string    `json:"from"`
 	To                   string    `json:"to"`
 	Value                string    `json:"value"`
-	Gas                  int       `json:"gas"`
+	Gas                  float64   `json:"gas"`
 	GasPrice             string    `json:"gasPrice"`
-	GasPriceGwei         int       `json:"gasPriceGwei"`
-	Nonce                int       `json:"nonce"`
+	GasPriceGwei         float64   `json:"gasPriceGwei"`
+	Nonce                uint64    `json:"nonce"`
 	BlockHash            string    `json:"blockHash"`
-	BlockNumber          int       `json:"blockNumber"`
-	TransactionIndex     int       `json:"transactionIndex"`
+	BlockNumber          uint64    `json:"blockNumber"`
+	TransactionIndex     uint64    `json:"transactionIndex"`
 	Input                string    `json:"input"`
-	GasUsed              int       `json:"gasUsed"`
+	GasUsed              float64   `json:"gasUsed"`
 	Asset                string    `json:"asset"`
 	WatchedAddress       string    `json:"watchedAddress"`
 	Direction            string    `json:"direction"`
